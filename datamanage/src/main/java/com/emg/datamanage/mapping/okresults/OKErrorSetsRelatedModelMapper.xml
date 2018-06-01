@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.emg.datamanage.dao.okresults.OKErrorSetsRelatedModelDao" >
+  <resultMap id="BaseResultMap" type="com.emg.datamanage.pojo.OKErrorSetsRelatedModel" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="errorid" property="errorid" jdbcType="BIGINT" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="featureid" property="featureid" jdbcType="BIGINT" />
+    <result column="layerid" property="layerid" jdbcType="INTEGER" />
+    <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="CurrentSchema">okresults.</sql>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, errorid, type, featureid, layerid, updatetime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.emg.datamanage.pojo.OKErrorSetsRelatedModelExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from <include refid="CurrentSchema"/>tb_okerrorsets_relateditem
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from <include refid="CurrentSchema"/>tb_okerrorsets_relateditem
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from <include refid="CurrentSchema"/>tb_okerrorsets_relateditem
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.emg.datamanage.pojo.OKErrorSetsRelatedModelExample" >
+    delete from <include refid="CurrentSchema"/>tb_okerrorsets_relateditem
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.emg.datamanage.pojo.OKErrorSetsRelatedModel" >
+    insert into <include refid="CurrentSchema"/>tb_okerrorsets_relateditem (id, errorid, type, 
+      featureid, layerid, updatetime
+      )
+    values (#{id,jdbcType=BIGINT}, #{errorid,jdbcType=BIGINT}, #{type,jdbcType=INTEGER}, 
+      #{featureid,jdbcType=BIGINT}, #{layerid,jdbcType=INTEGER}, #{updatetime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.emg.datamanage.pojo.OKErrorSetsRelatedModel" >
+    insert into <include refid="CurrentSchema"/>tb_okerrorsets_relateditem
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="errorid != null" >
+        errorid,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="featureid != null" >
+        featureid,
+      </if>
+      <if test="layerid != null" >
+        layerid,
+      </if>
+      <if test="updatetime != null" >
+        updatetime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="errorid != null" >
+        #{errorid,jdbcType=BIGINT},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="featureid != null" >
+        #{featureid,jdbcType=BIGINT},
+      </if>
+      <if test="layerid != null" >
+        #{layerid,jdbcType=INTEGER},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.emg.datamanage.pojo.OKErrorSetsRelatedModelExample" resultType="java.lang.Integer" >
+    select count(*) from <include refid="CurrentSchema"/>tb_okerrorsets_relateditem
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update <include refid="CurrentSchema"/>tb_okerrorsets_relateditem
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.errorid != null" >
+        errorid = #{record.errorid,jdbcType=BIGINT},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=INTEGER},
+      </if>
+      <if test="record.featureid != null" >
+        featureid = #{record.featureid,jdbcType=BIGINT},
+      </if>
+      <if test="record.layerid != null" >
+        layerid = #{record.layerid,jdbcType=INTEGER},
+      </if>
+      <if test="record.updatetime != null" >
+        updatetime = #{record.updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update <include refid="CurrentSchema"/>tb_okerrorsets_relateditem
+    set id = #{record.id,jdbcType=BIGINT},
+      errorid = #{record.errorid,jdbcType=BIGINT},
+      type = #{record.type,jdbcType=INTEGER},
+      featureid = #{record.featureid,jdbcType=BIGINT},
+      layerid = #{record.layerid,jdbcType=INTEGER},
+      updatetime = #{record.updatetime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.emg.datamanage.pojo.OKErrorSetsRelatedModel" >
+    update <include refid="CurrentSchema"/>tb_okerrorsets_relateditem
+    <set >
+      <if test="errorid != null" >
+        errorid = #{errorid,jdbcType=BIGINT},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="featureid != null" >
+        featureid = #{featureid,jdbcType=BIGINT},
+      </if>
+      <if test="layerid != null" >
+        layerid = #{layerid,jdbcType=INTEGER},
+      </if>
+      <if test="updatetime != null" >
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.emg.datamanage.pojo.OKErrorSetsRelatedModel" >
+    update <include refid="CurrentSchema"/>tb_okerrorsets_relateditem
+    set errorid = #{errorid,jdbcType=BIGINT},
+      type = #{type,jdbcType=INTEGER},
+      featureid = #{featureid,jdbcType=BIGINT},
+      layerid = #{layerid,jdbcType=INTEGER},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

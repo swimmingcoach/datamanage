@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.emg.datamanage.dao.errorlog.ErrorStatisticsModelDao" >
+  <resultMap id="BaseResultMap" type="com.emg.datamanage.pojo.ErrorStatisticsModel" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="taskid" property="taskid" jdbcType="BIGINT" />
+    <result column="batchid" property="batchid" jdbcType="BIGINT" />
+    <result column="oid" property="oid" jdbcType="VARCHAR" />
+    <result column="errortype" property="errortype" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="errordesc" property="errordesc" jdbcType="VARCHAR" />
+    <result column="num" property="num" jdbcType="INTEGER" />
+    <result column="checktime" property="checktime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="CurrentSchema">errorlog.</sql>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, taskid, batchid, oid, errortype, name, errordesc, num, checktime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.emg.datamanage.pojo.ErrorStatisticsModelExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from <include refid="CurrentSchema"/>tb_error_statistics
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from <include refid="CurrentSchema"/>tb_error_statistics
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from <include refid="CurrentSchema"/>tb_error_statistics
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.emg.datamanage.pojo.ErrorStatisticsModelExample" >
+    delete from <include refid="CurrentSchema"/>tb_error_statistics
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.emg.datamanage.pojo.ErrorStatisticsModel" >
+    insert into <include refid="CurrentSchema"/>tb_error_statistics (id, taskid, batchid, 
+      oid, errortype, name, 
+      errordesc, num, checktime
+      )
+    values (#{id,jdbcType=BIGINT}, #{taskid,jdbcType=BIGINT}, #{batchid,jdbcType=BIGINT}, 
+      #{oid,jdbcType=VARCHAR}, #{errortype,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, 
+      #{errordesc,jdbcType=VARCHAR}, #{num,jdbcType=INTEGER}, #{checktime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.emg.datamanage.pojo.ErrorStatisticsModel" >
+    insert into <include refid="CurrentSchema"/>tb_error_statistics
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="taskid != null" >
+        taskid,
+      </if>
+      <if test="batchid != null" >
+        batchid,
+      </if>
+      <if test="oid != null" >
+        oid,
+      </if>
+      <if test="errortype != null" >
+        errortype,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="errordesc != null" >
+        errordesc,
+      </if>
+      <if test="num != null" >
+        num,
+      </if>
+      <if test="checktime != null" >
+        checktime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="taskid != null" >
+        #{taskid,jdbcType=BIGINT},
+      </if>
+      <if test="batchid != null" >
+        #{batchid,jdbcType=BIGINT},
+      </if>
+      <if test="oid != null" >
+        #{oid,jdbcType=VARCHAR},
+      </if>
+      <if test="errortype != null" >
+        #{errortype,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="errordesc != null" >
+        #{errordesc,jdbcType=VARCHAR},
+      </if>
+      <if test="num != null" >
+        #{num,jdbcType=INTEGER},
+      </if>
+      <if test="checktime != null" >
+        #{checktime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.emg.datamanage.pojo.ErrorStatisticsModelExample" resultType="java.lang.Integer" >
+    select count(*) from <include refid="CurrentSchema"/>tb_error_statistics
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update <include refid="CurrentSchema"/>tb_error_statistics
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.taskid != null" >
+        taskid = #{record.taskid,jdbcType=BIGINT},
+      </if>
+      <if test="record.batchid != null" >
+        batchid = #{record.batchid,jdbcType=BIGINT},
+      </if>
+      <if test="record.oid != null" >
+        oid = #{record.oid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.errortype != null" >
+        errortype = #{record.errortype,jdbcType=BIGINT},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.errordesc != null" >
+        errordesc = #{record.errordesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.num != null" >
+        num = #{record.num,jdbcType=INTEGER},
+      </if>
+      <if test="record.checktime != null" >
+        checktime = #{record.checktime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update <include refid="CurrentSchema"/>tb_error_statistics
+    set id = #{record.id,jdbcType=BIGINT},
+      taskid = #{record.taskid,jdbcType=BIGINT},
+      batchid = #{record.batchid,jdbcType=BIGINT},
+      oid = #{record.oid,jdbcType=VARCHAR},
+      errortype = #{record.errortype,jdbcType=BIGINT},
+      name = #{record.name,jdbcType=VARCHAR},
+      errordesc = #{record.errordesc,jdbcType=VARCHAR},
+      num = #{record.num,jdbcType=INTEGER},
+      checktime = #{record.checktime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.emg.datamanage.pojo.ErrorStatisticsModel" >
+    update <include refid="CurrentSchema"/>tb_error_statistics
+    <set >
+      <if test="taskid != null" >
+        taskid = #{taskid,jdbcType=BIGINT},
+      </if>
+      <if test="batchid != null" >
+        batchid = #{batchid,jdbcType=BIGINT},
+      </if>
+      <if test="oid != null" >
+        oid = #{oid,jdbcType=VARCHAR},
+      </if>
+      <if test="errortype != null" >
+        errortype = #{errortype,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="errordesc != null" >
+        errordesc = #{errordesc,jdbcType=VARCHAR},
+      </if>
+      <if test="num != null" >
+        num = #{num,jdbcType=INTEGER},
+      </if>
+      <if test="checktime != null" >
+        checktime = #{checktime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.emg.datamanage.pojo.ErrorStatisticsModel" >
+    update <include refid="CurrentSchema"/>tb_error_statistics
+    set taskid = #{taskid,jdbcType=BIGINT},
+      batchid = #{batchid,jdbcType=BIGINT},
+      oid = #{oid,jdbcType=VARCHAR},
+      errortype = #{errortype,jdbcType=BIGINT},
+      name = #{name,jdbcType=VARCHAR},
+      errordesc = #{errordesc,jdbcType=VARCHAR},
+      num = #{num,jdbcType=INTEGER},
+      checktime = #{checktime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

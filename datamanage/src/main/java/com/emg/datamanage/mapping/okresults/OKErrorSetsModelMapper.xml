@@ -1,0 +1,467 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.emg.datamanage.dao.okresults.OKErrorSetsModelDao" >
+  <resultMap id="BaseResultMap" type="com.emg.datamanage.pojo.OKErrorSetsModel" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="taskid" property="taskid" jdbcType="BIGINT" />
+    <result column="featureid" property="featureid" jdbcType="BIGINT" />
+    <result column="layerid" property="layerid" jdbcType="INTEGER" />
+    <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP" />
+    <result column="field_name" property="fieldName" jdbcType="VARCHAR" />
+    <result column="editvalue" property="editvalue" jdbcType="VARCHAR" />
+    <result column="checkvalue" property="checkvalue" jdbcType="VARCHAR" />
+    <result column="qid" property="qid" jdbcType="VARCHAR" />
+    <result column="errortype" property="errortype" jdbcType="BIGINT" />
+    <result column="level" property="level" jdbcType="INTEGER" />
+    <result column="modifystate" property="modifystate" jdbcType="INTEGER" />
+    <result column="errorstate" property="errorstate" jdbcType="INTEGER" />
+    <result column="errorremark" property="errorremark" jdbcType="VARCHAR" />
+    <result column="checkroleid" property="checkroleid" jdbcType="INTEGER" />
+    <result column="changeroleid" property="changeroleid" jdbcType="INTEGER" />
+    <result column="md5" property="md5" jdbcType="VARCHAR" />
+    <result column="batchid" property="batchid" jdbcType="BIGINT" />
+    <result column="isrelated" property="isrelated" jdbcType="INTEGER" />
+    <result column="sbound" property="sbound" jdbcType="VARCHAR" />
+    <result column="bound" property="bound" jdbcType="OTHER" />
+  </resultMap>
+  <sql id="CurrentSchema">okresults.</sql>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, taskid, featureid, layerid, updatetime, field_name, editvalue, checkvalue, qid, 
+    errortype, level, modifystate, errorstate, errorremark, checkroleid, changeroleid, 
+    md5, batchid, isrelated, sbound, bound
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.emg.datamanage.pojo.OKErrorSetsModelExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from <include refid="CurrentSchema"/>tb_okerrorsets
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from <include refid="CurrentSchema"/>tb_okerrorsets
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from <include refid="CurrentSchema"/>tb_okerrorsets
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.emg.datamanage.pojo.OKErrorSetsModelExample" >
+    delete from <include refid="CurrentSchema"/>tb_okerrorsets
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.emg.datamanage.pojo.OKErrorSetsModel" >
+    insert into <include refid="CurrentSchema"/>tb_okerrorsets (id, taskid, featureid, 
+      layerid, updatetime, field_name, 
+      editvalue, checkvalue, qid, 
+      errortype, level, modifystate, 
+      errorstate, errorremark, checkroleid, 
+      changeroleid, md5, batchid, 
+      isrelated, sbound, bound
+      )
+    values (#{id,jdbcType=BIGINT}, #{taskid,jdbcType=BIGINT}, #{featureid,jdbcType=BIGINT}, 
+      #{layerid,jdbcType=INTEGER}, #{updatetime,jdbcType=TIMESTAMP}, #{fieldName,jdbcType=VARCHAR}, 
+      #{editvalue,jdbcType=VARCHAR}, #{checkvalue,jdbcType=VARCHAR}, #{qid,jdbcType=VARCHAR}, 
+      #{errortype,jdbcType=BIGINT}, #{level,jdbcType=INTEGER}, #{modifystate,jdbcType=INTEGER}, 
+      #{errorstate,jdbcType=INTEGER}, #{errorremark,jdbcType=VARCHAR}, #{checkroleid,jdbcType=INTEGER}, 
+      #{changeroleid,jdbcType=INTEGER}, #{md5,jdbcType=VARCHAR}, #{batchid,jdbcType=BIGINT}, 
+      #{isrelated,jdbcType=INTEGER}, #{sbound,jdbcType=VARCHAR}, #{bound,jdbcType=OTHER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.emg.datamanage.pojo.OKErrorSetsModel" >
+    insert into <include refid="CurrentSchema"/>tb_okerrorsets
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="taskid != null" >
+        taskid,
+      </if>
+      <if test="featureid != null" >
+        featureid,
+      </if>
+      <if test="layerid != null" >
+        layerid,
+      </if>
+      <if test="updatetime != null" >
+        updatetime,
+      </if>
+      <if test="fieldName != null" >
+        field_name,
+      </if>
+      <if test="editvalue != null" >
+        editvalue,
+      </if>
+      <if test="checkvalue != null" >
+        checkvalue,
+      </if>
+      <if test="qid != null" >
+        qid,
+      </if>
+      <if test="errortype != null" >
+        errortype,
+      </if>
+      <if test="level != null" >
+        level,
+      </if>
+      <if test="modifystate != null" >
+        modifystate,
+      </if>
+      <if test="errorstate != null" >
+        errorstate,
+      </if>
+      <if test="errorremark != null" >
+        errorremark,
+      </if>
+      <if test="checkroleid != null" >
+        checkroleid,
+      </if>
+      <if test="changeroleid != null" >
+        changeroleid,
+      </if>
+      <if test="md5 != null" >
+        md5,
+      </if>
+      <if test="batchid != null" >
+        batchid,
+      </if>
+      <if test="isrelated != null" >
+        isrelated,
+      </if>
+      <if test="sbound != null" >
+        sbound,
+      </if>
+      <if test="bound != null" >
+        bound,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="taskid != null" >
+        #{taskid,jdbcType=BIGINT},
+      </if>
+      <if test="featureid != null" >
+        #{featureid,jdbcType=BIGINT},
+      </if>
+      <if test="layerid != null" >
+        #{layerid,jdbcType=INTEGER},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fieldName != null" >
+        #{fieldName,jdbcType=VARCHAR},
+      </if>
+      <if test="editvalue != null" >
+        #{editvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="checkvalue != null" >
+        #{checkvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="qid != null" >
+        #{qid,jdbcType=VARCHAR},
+      </if>
+      <if test="errortype != null" >
+        #{errortype,jdbcType=BIGINT},
+      </if>
+      <if test="level != null" >
+        #{level,jdbcType=INTEGER},
+      </if>
+      <if test="modifystate != null" >
+        #{modifystate,jdbcType=INTEGER},
+      </if>
+      <if test="errorstate != null" >
+        #{errorstate,jdbcType=INTEGER},
+      </if>
+      <if test="errorremark != null" >
+        #{errorremark,jdbcType=VARCHAR},
+      </if>
+      <if test="checkroleid != null" >
+        #{checkroleid,jdbcType=INTEGER},
+      </if>
+      <if test="changeroleid != null" >
+        #{changeroleid,jdbcType=INTEGER},
+      </if>
+      <if test="md5 != null" >
+        #{md5,jdbcType=VARCHAR},
+      </if>
+      <if test="batchid != null" >
+        #{batchid,jdbcType=BIGINT},
+      </if>
+      <if test="isrelated != null" >
+        #{isrelated,jdbcType=INTEGER},
+      </if>
+      <if test="sbound != null" >
+        #{sbound,jdbcType=VARCHAR},
+      </if>
+      <if test="bound != null" >
+        #{bound,jdbcType=OTHER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.emg.datamanage.pojo.OKErrorSetsModelExample" resultType="java.lang.Integer" >
+    select count(*) from <include refid="CurrentSchema"/>tb_okerrorsets
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update <include refid="CurrentSchema"/>tb_okerrorsets
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.taskid != null" >
+        taskid = #{record.taskid,jdbcType=BIGINT},
+      </if>
+      <if test="record.featureid != null" >
+        featureid = #{record.featureid,jdbcType=BIGINT},
+      </if>
+      <if test="record.layerid != null" >
+        layerid = #{record.layerid,jdbcType=INTEGER},
+      </if>
+      <if test="record.updatetime != null" >
+        updatetime = #{record.updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fieldName != null" >
+        field_name = #{record.fieldName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.editvalue != null" >
+        editvalue = #{record.editvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checkvalue != null" >
+        checkvalue = #{record.checkvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.qid != null" >
+        qid = #{record.qid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.errortype != null" >
+        errortype = #{record.errortype,jdbcType=BIGINT},
+      </if>
+      <if test="record.level != null" >
+        level = #{record.level,jdbcType=INTEGER},
+      </if>
+      <if test="record.modifystate != null" >
+        modifystate = #{record.modifystate,jdbcType=INTEGER},
+      </if>
+      <if test="record.errorstate != null" >
+        errorstate = #{record.errorstate,jdbcType=INTEGER},
+      </if>
+      <if test="record.errorremark != null" >
+        errorremark = #{record.errorremark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checkroleid != null" >
+        checkroleid = #{record.checkroleid,jdbcType=INTEGER},
+      </if>
+      <if test="record.changeroleid != null" >
+        changeroleid = #{record.changeroleid,jdbcType=INTEGER},
+      </if>
+      <if test="record.md5 != null" >
+        md5 = #{record.md5,jdbcType=VARCHAR},
+      </if>
+      <if test="record.batchid != null" >
+        batchid = #{record.batchid,jdbcType=BIGINT},
+      </if>
+      <if test="record.isrelated != null" >
+        isrelated = #{record.isrelated,jdbcType=INTEGER},
+      </if>
+      <if test="record.sbound != null" >
+        sbound = #{record.sbound,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bound != null" >
+        bound = #{record.bound,jdbcType=OTHER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update <include refid="CurrentSchema"/>tb_okerrorsets
+    set id = #{record.id,jdbcType=BIGINT},
+      taskid = #{record.taskid,jdbcType=BIGINT},
+      featureid = #{record.featureid,jdbcType=BIGINT},
+      layerid = #{record.layerid,jdbcType=INTEGER},
+      updatetime = #{record.updatetime,jdbcType=TIMESTAMP},
+      field_name = #{record.fieldName,jdbcType=VARCHAR},
+      editvalue = #{record.editvalue,jdbcType=VARCHAR},
+      checkvalue = #{record.checkvalue,jdbcType=VARCHAR},
+      qid = #{record.qid,jdbcType=VARCHAR},
+      errortype = #{record.errortype,jdbcType=BIGINT},
+      level = #{record.level,jdbcType=INTEGER},
+      modifystate = #{record.modifystate,jdbcType=INTEGER},
+      errorstate = #{record.errorstate,jdbcType=INTEGER},
+      errorremark = #{record.errorremark,jdbcType=VARCHAR},
+      checkroleid = #{record.checkroleid,jdbcType=INTEGER},
+      changeroleid = #{record.changeroleid,jdbcType=INTEGER},
+      md5 = #{record.md5,jdbcType=VARCHAR},
+      batchid = #{record.batchid,jdbcType=BIGINT},
+      isrelated = #{record.isrelated,jdbcType=INTEGER},
+      sbound = #{record.sbound,jdbcType=VARCHAR},
+      bound = #{record.bound,jdbcType=OTHER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.emg.datamanage.pojo.OKErrorSetsModel" >
+    update <include refid="CurrentSchema"/>tb_okerrorsets
+    <set >
+      <if test="taskid != null" >
+        taskid = #{taskid,jdbcType=BIGINT},
+      </if>
+      <if test="featureid != null" >
+        featureid = #{featureid,jdbcType=BIGINT},
+      </if>
+      <if test="layerid != null" >
+        layerid = #{layerid,jdbcType=INTEGER},
+      </if>
+      <if test="updatetime != null" >
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fieldName != null" >
+        field_name = #{fieldName,jdbcType=VARCHAR},
+      </if>
+      <if test="editvalue != null" >
+        editvalue = #{editvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="checkvalue != null" >
+        checkvalue = #{checkvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="qid != null" >
+        qid = #{qid,jdbcType=VARCHAR},
+      </if>
+      <if test="errortype != null" >
+        errortype = #{errortype,jdbcType=BIGINT},
+      </if>
+      <if test="level != null" >
+        level = #{level,jdbcType=INTEGER},
+      </if>
+      <if test="modifystate != null" >
+        modifystate = #{modifystate,jdbcType=INTEGER},
+      </if>
+      <if test="errorstate != null" >
+        errorstate = #{errorstate,jdbcType=INTEGER},
+      </if>
+      <if test="errorremark != null" >
+        errorremark = #{errorremark,jdbcType=VARCHAR},
+      </if>
+      <if test="checkroleid != null" >
+        checkroleid = #{checkroleid,jdbcType=INTEGER},
+      </if>
+      <if test="changeroleid != null" >
+        changeroleid = #{changeroleid,jdbcType=INTEGER},
+      </if>
+      <if test="md5 != null" >
+        md5 = #{md5,jdbcType=VARCHAR},
+      </if>
+      <if test="batchid != null" >
+        batchid = #{batchid,jdbcType=BIGINT},
+      </if>
+      <if test="isrelated != null" >
+        isrelated = #{isrelated,jdbcType=INTEGER},
+      </if>
+      <if test="sbound != null" >
+        sbound = #{sbound,jdbcType=VARCHAR},
+      </if>
+      <if test="bound != null" >
+        bound = #{bound,jdbcType=OTHER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.emg.datamanage.pojo.OKErrorSetsModel" >
+    update <include refid="CurrentSchema"/>tb_okerrorsets
+    set taskid = #{taskid,jdbcType=BIGINT},
+      featureid = #{featureid,jdbcType=BIGINT},
+      layerid = #{layerid,jdbcType=INTEGER},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      field_name = #{fieldName,jdbcType=VARCHAR},
+      editvalue = #{editvalue,jdbcType=VARCHAR},
+      checkvalue = #{checkvalue,jdbcType=VARCHAR},
+      qid = #{qid,jdbcType=VARCHAR},
+      errortype = #{errortype,jdbcType=BIGINT},
+      level = #{level,jdbcType=INTEGER},
+      modifystate = #{modifystate,jdbcType=INTEGER},
+      errorstate = #{errorstate,jdbcType=INTEGER},
+      errorremark = #{errorremark,jdbcType=VARCHAR},
+      checkroleid = #{checkroleid,jdbcType=INTEGER},
+      changeroleid = #{changeroleid,jdbcType=INTEGER},
+      md5 = #{md5,jdbcType=VARCHAR},
+      batchid = #{batchid,jdbcType=BIGINT},
+      isrelated = #{isrelated,jdbcType=INTEGER},
+      sbound = #{sbound,jdbcType=VARCHAR},
+      bound = #{bound,jdbcType=OTHER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

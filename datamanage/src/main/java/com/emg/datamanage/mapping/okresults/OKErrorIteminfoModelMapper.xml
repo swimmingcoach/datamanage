@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.emg.datamanage.dao.okresults.OKErrorIteminfoModelDao" >
+  <resultMap id="BaseResultMap" type="com.emg.datamanage.pojo.OKErrorIteminfoModel" >
+    <result column="id" property="id" jdbcType="BIGINT" />
+    <result column="qid" property="qid" jdbcType="VARCHAR" />
+    <result column="errortype" property="errortype" jdbcType="BIGINT" />
+    <result column="errorremark" property="errorremark" jdbcType="VARCHAR" />
+    <result column="enable" property="enable" jdbcType="INTEGER" />
+    <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="CurrentSchema">okresults.</sql>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, qid, errortype, errorremark, enable, updatetime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.emg.datamanage.pojo.OKErrorIteminfoModelExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from <include refid="CurrentSchema"/>tb_okerror_iteminfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.emg.datamanage.pojo.OKErrorIteminfoModelExample" >
+    delete from <include refid="CurrentSchema"/>tb_okerror_iteminfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.emg.datamanage.pojo.OKErrorIteminfoModel" >
+    insert into <include refid="CurrentSchema"/>tb_okerror_iteminfo (id, qid, errortype, 
+      errorremark, enable, updatetime
+      )
+    values (#{id,jdbcType=BIGINT}, #{qid,jdbcType=VARCHAR}, #{errortype,jdbcType=BIGINT}, 
+      #{errorremark,jdbcType=VARCHAR}, #{enable,jdbcType=INTEGER}, #{updatetime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.emg.datamanage.pojo.OKErrorIteminfoModel" >
+    insert into <include refid="CurrentSchema"/>tb_okerror_iteminfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="qid != null" >
+        qid,
+      </if>
+      <if test="errortype != null" >
+        errortype,
+      </if>
+      <if test="errorremark != null" >
+        errorremark,
+      </if>
+      <if test="enable != null" >
+        enable,
+      </if>
+      <if test="updatetime != null" >
+        updatetime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="qid != null" >
+        #{qid,jdbcType=VARCHAR},
+      </if>
+      <if test="errortype != null" >
+        #{errortype,jdbcType=BIGINT},
+      </if>
+      <if test="errorremark != null" >
+        #{errorremark,jdbcType=VARCHAR},
+      </if>
+      <if test="enable != null" >
+        #{enable,jdbcType=INTEGER},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.emg.datamanage.pojo.OKErrorIteminfoModelExample" resultType="java.lang.Integer" >
+    select count(*) from <include refid="CurrentSchema"/>tb_okerror_iteminfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update <include refid="CurrentSchema"/>tb_okerror_iteminfo
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.qid != null" >
+        qid = #{record.qid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.errortype != null" >
+        errortype = #{record.errortype,jdbcType=BIGINT},
+      </if>
+      <if test="record.errorremark != null" >
+        errorremark = #{record.errorremark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enable != null" >
+        enable = #{record.enable,jdbcType=INTEGER},
+      </if>
+      <if test="record.updatetime != null" >
+        updatetime = #{record.updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update <include refid="CurrentSchema"/>tb_okerror_iteminfo
+    set id = #{record.id,jdbcType=BIGINT},
+      qid = #{record.qid,jdbcType=VARCHAR},
+      errortype = #{record.errortype,jdbcType=BIGINT},
+      errorremark = #{record.errorremark,jdbcType=VARCHAR},
+      enable = #{record.enable,jdbcType=INTEGER},
+      updatetime = #{record.updatetime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>
